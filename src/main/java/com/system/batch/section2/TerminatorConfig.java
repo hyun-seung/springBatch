@@ -9,6 +9,7 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.core.step.tasklet.Tasklet;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +32,7 @@ public class TerminatorConfig {
 
 
     @Bean
-    public Step terminationStep(JobRepository jobRepository, PlatformTransactionManager transactionManager, Tasklet terminatorTasklet) {
+    public Step terminationStep(JobRepository jobRepository, PlatformTransactionManager transactionManager, @Qualifier("terminaorTasklet") Tasklet terminatorTasklet) {
         return new StepBuilder("terminationStep", jobRepository)
                 .tasklet(terminatorTasklet, transactionManager)
                 .build();
