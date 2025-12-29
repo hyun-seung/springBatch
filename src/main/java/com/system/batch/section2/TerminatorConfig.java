@@ -136,7 +136,7 @@ public class TerminatorConfig {
         };
     }
 
-    @Bean
+    // @Bean -> 빈으로 설정해놓으면 JSON 형식만 받음
     public JobParametersConverter jobParameterConverter() {
         return new JsonJobParametersConverter();
     }
