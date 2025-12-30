@@ -35,17 +35,17 @@ public class SystemDestructionConfig {
                 .build();
     }
 
-    @Bean
-    public Job systemDestructionJob(
-            JobRepository jobRepository,
-            Step systemDestructionStep,
-            SystemDestructionValidator validator
-    ) {
-        return new JobBuilder("systemDestructionJob", jobRepository)
-                .validator(validator)
-                .start(systemDestructionStep)
-                .build();
-    }
+//    @Bean
+//    public Job systemDestructionJob(
+//            JobRepository jobRepository,
+//            Step systemDestructionStep,
+//            SystemDestructionValidator validator
+//    ) {
+//        return new JobBuilder("systemDestructionJob", jobRepository)
+//                .validator(validator)
+//                .start(systemDestructionStep)
+//                .build();
+//    }
 
     @Bean
     public Step systemDestructionStep(
