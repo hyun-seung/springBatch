@@ -1,0 +1,17 @@
+[
+ {"victimId":"KILL-001","victimName":"피해자1","executionDate":"2026-01-01","causeOfDeath":"처형사유1"},
+ {"victimId":"KILL-002","victimName":"피해자2","executionDate":"2026-01-02","causeOfDeath":"처형사유2"},
+ {"victimId":"KILL-003","victimName":"피해자3","executionDate":"2026-01-03","causeOfDeath":"처형사유3"},
+ {"victimId":"KILL-004","victimName":"피해자4","executionDate":"2026-01-04","causeOfDeath":"처형사유4"},
+ {"victimId":"KILL-005","victimName":"피해자5","executionDate":"2026-01-05","causeOfDeath":"처형사유5"},
+ {"victimId":"KILL-006","victimName":"피해자6","executionDate":"2026-01-06","causeOfDeath":"처형사유6"},
+ {"victimId":"KILL-007","victimName":"피해자7","executionDate":"2026-01-07","causeOfDeath":"처형사유7"},
+ {"victimId":"KILL-008","victimName":"피해자8","executionDate":"2026-01-08","causeOfDeath":"처형사유8"},
+ {"victimId":"KILL-009","victimName":"피해자9","executionDate":"2026-01-09","causeOfDeath":"처형사유9"},
+ {"victimId":"KILL-010","victimName":"피해자10","executionDate":"2026-01-10","causeOfDeath":"처형사유10"},
+ {"victimId":"KILL-011","victimName":"피해자11","executionDate":"2026-01-11","causeOfDeath":"처형사유11"},
+ {"victimId":"KILL-012","victimName":"피해자12","executionDate":"2026-01-12","causeOfDeath":"처형사유12"},
+ {"victimId":"KILL-013","victimName":"피해자13","executionDate":"2026-01-13","causeOfDeath":"처형사유13"},
+ {"victimId":"KILL-014","victimName":"피해자14","executionDate":"2026-01-14","causeOfDeath":"처형사유14"},
+ {"victimId":"KILL-015","victimName":"피해자15","executionDate":"2026-01-15","causeOfDeath":"처형사유15"}
+]

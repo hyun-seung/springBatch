@@ -13,6 +13,9 @@ import org.springframework.batch.item.file.MultiResourceItemWriter;
 import org.springframework.batch.item.file.builder.FlatFileItemWriterBuilder;
 import org.springframework.batch.item.file.builder.MultiResourceItemWriterBuilder;
 import org.springframework.batch.item.file.transform.RecordFieldExtractor;
+import org.springframework.batch.item.json.JacksonJsonObjectMarshaller;
+import org.springframework.batch.item.json.JsonFileItemWriter;
+import org.springframework.batch.item.json.builder.JsonFileItemWriterBuilder;
 import org.springframework.batch.item.support.ListItemReader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -48,13 +51,15 @@ public class DeathNoteWriteJobConfig {
             PlatformTransactionManager transactionManager,
             ListItemReader<DeathNote> deathNoteListReader,
 //            FlatFileItemWriter<DeathNote> deathNoteWriter
-            MultiResourceItemWriter<DeathNote> multiResourceItemWriter
+//            MultiResourceItemWriter<DeathNote> multiResourceItemWriter
+            JsonFileItemWriter<DeathNote> deathNoteJsonWriter
     ) {
         return new StepBuilder("deathNoteWirteStep", jobRepository)
                 .<DeathNote, DeathNote>chunk(10, transactionManager)
                 .reader(deathNoteListReader)
 //                .writer(deathNoteWriter)
-                .writer(multiResourceItemWriter)
+//                .writer(multiResourceItemWriter)
+                .writer(deathNoteJsonWriter)
                 .build();
     }
 
@@ -131,22 +136,35 @@ public class DeathNoteWriteJobConfig {
 //                .build();
 //    }
 
+//    @Bean
+//    @StepScope
+//    public FlatFileItemWriter<DeathNote> deathNoteWriter(
+//            @Value("#{jobParameters['outputDir']}") String outputDir
+//    ) {
+//        return new FlatFileItemWriterBuilder<DeathNote>()
+//                .name("deathNoteWriter")
+//                .resource(new FileSystemResource(outputDir + "/death_note_report.txt"))
+//                .formatted()
+//                .format("처형 ID: %s | 처형일자: %s | 피해자: %s | 사인: %s")
+//                .sourceType(DeathNote.class)
+//                .names("victimId", "executionDate", "victimName", "causeOfDeath")
+//                .headerCallback(writer -> writer.write("======= 처형 기록부 ======="))
+//                .footerCallback(writer -> writer.write("======= 처형 완료 ======="))
+//                .build();
+//    }
+//
     @Bean
     @StepScope
-    public FlatFileItemWriter<DeathNote> deathNoteWriter(
+    public JsonFileItemWriter<DeathNote> deathNoteJsonWriter(
             @Value("#{jobParameters['outputDir']}") String outputDir
     ) {
-        return new FlatFileItemWriterBuilder<DeathNote>()
-                .name("deathNoteWriter")
-                .resource(new FileSystemResource(outputDir + "/death_note_report.txt"))
-                .formatted()
-                .format("처형 ID: %s | 처형일자: %s | 피해자: %s | 사인: %s")
-                .sourceType(DeathNote.class)
-                .names("victimId", "executionDate", "victimName", "causeOfDeath")
-                .headerCallback(writer -> writer.write("======= 처형 기록부 ======="))
-                .footerCallback(writer -> writer.write("======= 처형 완료 ======="))
+        return new JsonFileItemWriterBuilder<DeathNote>()
+                .jsonObjectMarshaller(new JacksonJsonObjectMarshaller<>())
+                .resource(new FileSystemResource(outputDir + "/deat_notes.json"))
+                .name("logEntryJsonWriter")
                 .build();
     }
+
 
     public RecordFieldExtractor<DeathNote> fieldExtractor() {
         RecordFieldExtractor<DeathNote> fieldExtractor = new RecordFieldExtractor<>(DeathNote.class);

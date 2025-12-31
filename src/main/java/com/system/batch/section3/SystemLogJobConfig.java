@@ -206,18 +206,18 @@ public class SystemLogJobConfig {
 
     public record SystemDeath(String command, int cpu, String status) {}
 
-    @Bean
-    @StepScope
-    public FlatFileItemReader<SystemDeath> systemDeathReader(
-            @Value("#{jobParameters['inputFile']}") String inputFile
-    ) {
-        return new FlatFileItemReaderBuilder<SystemDeath>()
-                .name("systemKillReader")
-                .resource(new FileSystemResource(inputFile))
-                .delimited()
-                .names("command", "cpu", "status")
-                .targetType(SystemDeath.class)
-                .linesToSkip(1)
-                .build();
-    }
+//    @Bean
+//    @StepScope
+//    public FlatFileItemReader<SystemDeath> systemDeathReader(
+//            @Value("#{jobParameters['inputFile']}") String inputFile
+//    ) {
+//        return new FlatFileItemReaderBuilder<SystemDeath>()
+//                .name("systemKillReader")
+//                .resource(new FileSystemResource(inputFile))
+//                .delimited()
+//                .names("command", "cpu", "status")
+//                .targetType(SystemDeath.class)
+//                .linesToSkip(1)
+//                .build();
+//    }
 }
